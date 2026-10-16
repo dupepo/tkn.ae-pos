@@ -1,0 +1,12 @@
+{
+  "name": "TKN",
+  "short_name": "TKN",
+  "description": "Duaa's POS for Hibah ;)",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#fbf7f1",
+  "theme_color": "#754d3d",
+  "icons": []
+}

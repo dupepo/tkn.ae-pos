@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+  <meta content="#754d3d" name="theme-color"/>
+
+    <title>
+    TKN &mdash; Sales
+    </title>
+
+    <link href="manifest.json" rel="manifest"/>
+    <link href="styles.css" rel="stylesheet"/>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- top bar: shop name, backup, and settings -->
+
+    <header class="top"> 
+
+    <div class="brand">
+
+        <div>
+
+            <h1 id="shopTitle">
+            TKN
+            </h1>
+
+            <p id="eventSubtitle">
+            Sales
+            </p>
+
+        </div>
+     
+    </div>
+
+    <div class="top-actions">
+
+        <button class="btn ghost" id="backupBtn">
+        Backup
+        </button>
+
+        <button class="btn primary" id="settingsShortcut">
+        ⚙
+        </button>
+
+    </div>
+
+    </header>
+
+   <!-- main navigation -->
+
+    <nav aria-label="Main navigation" class="tabs">
+
+        <button class="tab active" data-view="sell">
+        Sell
+        </button>
+
+        <button class="tab" data-view="productsView">
+        Products
+        </button>
+
+        <button class="tab" data-view="history">
+        Sales history
+        </button>
+
+        <button class="tab" data-view="settings">
+        Settings
+        </button>
+
+    </nav>
+
+   <!-- main app screens -->
+    <main class="main">
+    <section class="view active" id="sell">
+
+    <div class="section-head">
+        <div>
+
+            <h2>
+            Make a sale
+            </h2>
+
+            <div class="muted tiny" id="eventLabel">
+            Event: Event
+            </div>
+
+        </div>
+
+        <button class="btn small ghost" id="changeEvent">
+        Change event
+        </button>
+
+    </div>
+
+    <div class="layout">
+        <div>
+
+            <div class="products" id="productGrid"></div>
+
+            <p class="footer-note">
+            Tap a product to add it to the order. Tap it again to add another.
+            </p>
+
+        </div>
+
+    <aside class="cart">
+
+        <div class="cart-head">
+
+            <h3>
+            Current order
+            </h3>
+
+            <button class="btn small ghost" id="clearCart">
+            Clear
+            </button>
+
+        </div>
+
+       <div class="cart-items" id="cartItems"></div>
+
+       <div class="totalrow">
+           
+            <span>
+            Total due
+            </span>
+
+            <strong id="cartTotal">
+            AED 0.00
+            </strong>
+
+        </div>
+
+        <div class="cart-actions">
+
+            <button class="btn" id="cashBtn">
+            Cash
+            </button>
+
+            <button class="btn primary" id="cardBtn">
+            Card &middot; Ziina
+            </button>
+
+        </div>
+
+    </aside>
+    </div>
+    </section>
+
+    <section class="view" id="productsView">
+
+        <div class="section-head">
+
+            <div>
+
+                <h2>
+                Products
+                </h2>
+
+                <div class="muted tiny">
+                Edit your own names and prices.
+                </div>
+
+            </div>
+
+            <button class="btn primary" id="addProductBtn">
+            ＋ Add product
+            </button>
+
+        </div>
+
+        <div class="panel">
+        <div id="productAdmin"></div>
+        </div>
+
+    </section>
+
+    <section class="view" id="history">
+        
+        <div class="section-head">
+            <div>
+
+                <h2>
+                Sales history
+                </h2>
+
+                <div class="muted tiny" id="historyEvent">
+                All saved sales
+                </div>
+
+            </div>
+
+            <button class="btn small ghost" id="exportCsvBtn">
+            Export CSV
+            </button>
+
+        </div>
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <small>
+            Total revenue
+            </small>
+
+            <strong id="statRevenue">
+            AED 0.00
+            </strong>
+
+        </div>
+
+        <div class="stat">
+
+            <small>
+            Cash received
+            </small>
+
+            <strong id="statCash">
+            AED 0.00
+            </strong>
+
+        </div>
+
+        <div class="stat">
+
+            <small>
+            Card sales
+            </small>
+
+            <strong id="statCard">
+            AED 0.00
+            </strong>
+
+        </div>
+
+    </div>
+
+    <div id="salesList"></div>
+
+    <p class="footer-note">
+    Sales are saved on this device. Export a backup regularly, especially before clearing browser data or changing devices.
+    </p>
+
+    </section>
+
+    <section class="view" id="settings">
+
+    <div class="section-head">
+
+        <div>
+
+            <h2>
+            Settings
+            </h2>
+
+            <div class="muted tiny">
+            Make it yours.
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="panel">
+
+        <h3>
+        Shop and event
+        </h3>
+
+        <div class="field">
+
+            <label for="shopNameInput">
+            Shop name
+            </label>
+
+            <input id="shopNameInput" maxlength="60" placeholder="e.g. Threads & Knots"/>
+
+        </div>
+
+        <div class="field">
+
+            <label for="eventNameInput">
+            Current event name
+            </label>
+
+            <input id="eventNameInput" maxlength="80" placeholder="e.g. Duaa's Bedroom"/>
+
+        </div>
+
+        <button class="btn primary" id="saveSettings">
+        Save settings
+        </button>
+
+    </div>
+
+    <div class="panel">
+
+        <h3>
+        Data backup
+        </h3>
+
+        <p class="muted tiny">
+        Export a backup file to keep your products and sales safe. Import a backup to restore it on this device.
+        </p>
+
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+            
+            <button class="btn" id="exportBackup">
+            Export backup
+            </button>
+       
+            <label class="btn ghost filelabel">
+            Import backup
+            <input accept="application/json" id="importFile" type="file"/>
+            </label>
+    
+        </div>
+
+        <div class="notice">
+        This first version stores data locally on the device/browser. It does not sync with Ziina or another device automatically.
+        </div>
+
+        <button class="btn danger" id="resetData">
+        Reset all app data
+        </button>
+
+    </div>
+
+        <p class="footer-note">
+        Offline note: this app is designed to run offline after it's been installed/loaded correctly. A Home Screen install generally requires opening the hosted app once while online. Ziina still needs connectivity to process card payments.
+        </p>
+
+    </section>
+    </main>
+    </div>
+
+    <!-- checkout and editing dialogs -->
+
+    <div aria-labelledby="cashTitle" aria-modal="true" class="overlay" id="cashModal" role="dialog">
+
+    <div class="modal">
+
+        <div class="modal-head">
+
+            <h2 id="cashTitle">
+            Cash payment
+            </h2>
+        
+            <button class="close" data-close="cashModal">
+            &times;
+            </button>
+
+        </div>
+
+        <div class="muted tiny">
+        Order total
+        </div>
+
+        <div class="amount" id="cashTotal">
+        AED 0.00
+        </div>
+
+    <div class="field">
+
+        <label for="cashReceived">
+        Cash received (AED)
+        </label>
+
+        <input id="cashReceived" inputmode="decimal" min="0" placeholder="Enter amount received" step="0.01" type="number"/>
+
+    </div>
+
+    <div class="quickcash">
+
+        <button class="btn small ghost" data-cash="20">
+        AED 20
+        </button>
+
+        <button class="btn small ghost" data-cash="50">
+        AED 50
+        </button>
+
+        <button class="btn small ghost" data-cash="100">
+        AED 100
+        </button>
+
+        <button class="btn small ghost" data-cash="200">
+        AED 200
+        </button>
+
+        <button class="btn small ghost" id="exactCash">
+        Exact
+        </button>
+
+    </div>
+
+    <div class="changebox">
+
+        <span id="changeLabel">
+        Change to give
+        </span>
+    
+        <strong id="changeAmount">
+        AED 0.00
+        </strong>
+    
+    </div>
+    
+    <div class="modal-actions">
+        
+        <button class="btn ghost" data-close="cashModal">
+        Cancel
+        </button>
+    
+        <button class="btn primary" id="completeCash">
+        Complete cash sale
+        </button>
+    
+    </div>
+    </div>
+    </div>
+
+    <div aria-labelledby="cardTitle" aria-modal="true" class="overlay" id="cardModal" role="dialog">
+
+    <div class="modal">
+
+    <div class="modal-head">
+
+        <h2 id="cardTitle">
+        Card &middot; Ziina
+        </h2>
+
+        <button class="close" data-close="cardModal">
+        &times;
+        </button>
+    
+    </div>
+    
+        <div class="muted tiny">
+        Charge this amount in Ziina
+        </div>
+    
+        <div class="amount" id="cardTotal">
+        AED 0.00
+        </div>
+    
+        <div class="notice">
+        1. Switch to Ziina and collect the payment. 2. Return here only after Ziina confirms the payment. 3. Tap the confirmation button below to record this sale.
+        </div>
+
+        <div class="modal-actions">
+        
+            <button class="btn ghost" data-close="cardModal">
+            Not yet
+            </button>
+        
+            <button class="btn primary" id="confirmCard">
+            &checkmark; Ziina confirmed
+            </button>
+        
+        </div>
+
+    </div>
+    </div>
+
+    <div aria-labelledby="productModalTitle" aria-modal="true" class="overlay" id="productModal" role="dialog">
+
+    <div class="modal">
+        
+        <div class="modal-head">
+            
+            <h2 id="productModalTitle">
+            Add product
+            </h2>
+     
+            <button class="close" data-close="productModal">
+            &times;
+            </button>
+    
+        </div>
+
+        <input id="editingProductId" type="hidden"/>
+    
+        <div class="formrow">
+
+            <div class="field">
+
+                <label for="productName">
+                Product name
+                </label>
+
+                <input id="productName" maxlength="70" placeholder="Product"/>
+
+            </div>
+
+            <div class="field">
+      
+                <label for="productPrice">
+                Price (AED)
+                </label>
+
+                <input id="productPrice" inputmode="decimal" min="0" placeholder="raise the price" step="0.01" type="number"/>
+        
+            </div>
+
+        </div>
+
+    <div class="modal-actions">
+    
+        <button class="btn ghost" data-close="productModal">
+        Cancel
+        </button>
+     
+        <button class="btn primary" id="saveProduct">
+        Save product
+        </button>
+    
+    </div>
+    </div>
+    </div>
+
+    <div aria-labelledby="eventTitle" aria-modal="true" class="overlay" id="eventModal" role="dialog">
+    
+    <div class="modal">
+
+        <div class="modal-head">
+        
+            <h2 id="eventTitle">
+            Change event
+            </h2>
+
+            <button class="close" data-close="eventModal">
+            &times;
+            </button>
+        
+        </div>
+
+        <p class="muted tiny">
+        Sales are tagged with the event name active when you complete them.
+        </p>
+
+    <div class="field">
+    
+        <label for="newEventName">
+        Event name
+        </label>
+     
+        <input id="newEventName" maxlength="80" placeholder="e.g. Duaa's Bedroom"/>
+    
+    </div>
+
+    <div class="modal-actions">
+    
+        <button class="btn ghost" data-close="eventModal">
+        Cancel
+        </button>
+        
+        <button class="btn primary" id="saveEvent">
+        Use this event
+        </button>
+    
+    </div>
+    </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+    <script defer="" src="app.js"></script>
+
+</body>
+</html>
+
